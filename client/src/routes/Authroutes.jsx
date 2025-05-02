@@ -1,14 +1,12 @@
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import LoginForm from "../pages/auth/Login"
 import SignupForm from "../pages/auth/Signup"
 import EditUser from "../components/edituser/Edituser"
 import { lazy, Suspense } from "react"
-function Authroutes() {
+import Privateroute from "./Privateroute"
 
-    const isAuthenticated = () => {
-        const token = localStorage.getItem("token");
-        return token !== null;  // Return true if token exists
-    };
+
+function Authroutes() {
 
     const Home = lazy(() => import("../pages/home/Home"));
     return (
@@ -20,9 +18,13 @@ function Authroutes() {
                     <Suspense fallback={<div>Loading</div>}><Home /></Suspense>} />
                 <Route
                     path="/edituser"
-                    element={isAuthenticated() ? <EditUser /> : <Navigate to="/" />}
+                    element={
+                        <Privateroute>
+                            <EditUser />
+                        </Privateroute>
+                    }
                 />
-
+                {/* <Route path="/edituser" element={<EditUser />} /> */}
             </Routes>
         </>
     )

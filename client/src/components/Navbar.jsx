@@ -6,6 +6,7 @@ import { Dropdown } from 'react-bootstrap'; // Importing Bootstrap Dropdown
 import { FaUserCircle } from 'react-icons/fa'; // Font Awesome icon for the logo
 import Deletemodel from "./modal/Deletemodal";
 import toast from "react-hot-toast";
+import Dropdownmenu from "./dropdown/Dropdown";
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
@@ -32,20 +33,6 @@ const Navbar = () => {
         fetchUser();
     }, []);
 
-    const handleLogoutAccount = () => {
-        localStorage.removeItem("token");
-        navigate("/");
-    };
-
-    const handleLogin = () => {
-        navigate("/");
-    };
-
-    const handleEditUser = () => {
-        navigate("/edituser"); // You can replace with your edit page
-    };
-
-
     const handleDeleteAccount = async () => {
         try {
             setShowModal(false); // Close the modal first
@@ -69,6 +56,10 @@ const Navbar = () => {
         }
     };
 
+    const handleLogin = () => {
+        navigate("/");
+    };
+
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
@@ -83,26 +74,7 @@ const Navbar = () => {
                     {user ? (
                         <>
                             {/* Logo (FontAwesome Icon) with Dropdown */}
-                            <Dropdown align="end">
-                                <Dropdown.Toggle variant="link" id="user-dropdown" className="text-white d-flex align-items-center  fw-semibold text-decoration-none">
-                                    <FaUserCircle size={40} className="me-2" />
-                                    <span>{user.name}</span>
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={handleEditUser}>
-                                        Edit
-                                    </Dropdown.Item>
-                                    <Dropdown.Item className="text-danger" onClick={handleLogoutAccount}>
-                                        Logout
-                                    </Dropdown.Item>
-
-                                    <Dropdown.Item className="text-danger" onClick={() => setShowModal(true)}>
-                                        Delete Account
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-
+                            <Dropdownmenu  setShowModal={setShowModal}  Userdata={user}/>
                             <Deletemodel
                                 show={showModal}
                                 onClose={() => setShowModal(false)}

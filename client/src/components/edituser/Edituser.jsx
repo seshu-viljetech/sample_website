@@ -94,7 +94,7 @@ const EditUser = () => {
                             value={user.email || ""}
                             autoComplete="email"
                             onChange={handleInputChange}
-                            required
+                            disabled
                         />
                     </div>
                     { changePassword && 

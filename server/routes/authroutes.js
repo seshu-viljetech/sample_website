@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 
-router.post("/signup", authMiddleware,async (req, res) => {
+router.post("/signup",async (req, res) => {
     try {
         const { Name, Email, Password, CnfrmPassword } = req.body;
 
@@ -51,7 +51,7 @@ router.post("/signup", authMiddleware,async (req, res) => {
 });
 
 
-router.post("/login",authMiddleware, async (req, res) => {
+router.post("/login", async (req, res) => {
     try {
 
         const { Email, Password } = req.body;
