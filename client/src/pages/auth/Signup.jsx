@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from "axios"
-import Button from './Button';
+import Button from '../../components/Button';
 import toast from "react-hot-toast";
 
 const SignupForm = () => {
