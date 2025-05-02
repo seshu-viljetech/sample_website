@@ -1,0 +1,77 @@
+/* Background Gradient for premium look */
+.home-container {
+    background: linear-gradient(135deg, #00b4d8, #4e00ff);
+    min-height: 100vh;
+    padding-top: 56px; /* Space for fixed navbar */
+  }
+  
+  /* For Welcome Section */
+  .home-page {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .display-3 {
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  
+  .text-primary {
+    color: #ff6f61;
+  }
+  
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    max-width: 550px;
+  }
+  
+  .btn-light {
+    background-color: #ffffff;
+    color: #4e00ff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 40px;
+    font-weight: 600;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-light:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Card Style for Premium Features */
+  .premium-cards {
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .premium-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+  }
+  
+  .premium-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #4e00ff;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
