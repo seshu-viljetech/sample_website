@@ -4,6 +4,7 @@ import SignupForm from "../pages/auth/Signup"
 import EditUser from "../components/edituser/Edituser"
 import { lazy, Suspense } from "react"
 import Privateroute from "./Privateroute"
+import Pagenotfound from "../pages/pagenotfound/Pagenotfound"
 
 
 function Authroutes() {
@@ -24,7 +25,7 @@ function Authroutes() {
                         </Privateroute>
                     }
                 />
-                {/* <Route path="/edituser" element={<EditUser />} /> */}
+                <Route path="*" element={<Pagenotfound />} />
             </Routes>
         </>
     )

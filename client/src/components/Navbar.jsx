@@ -83,7 +83,7 @@ const Navbar = () => {
 
                         </>
                     ) : (
-                        <button className="btn btn-outline-light btn-sm" onClick={handleLogin}>
+                        <button className="btn btn-outline-light" onClick={handleLogin}>
                             Login
                         </button>
                     )}
