@@ -1,26 +1,21 @@
 const express = require("express");
 const authMiddleware = require("../middlewear/authmiddlewear");
-const bcrypt=require("bcrypt")
+const bcrypt = require("bcrypt")
 const userModel = require("../models/user")
-const jwt=require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
+const signupValidations = require("../validations/signupValidation")
 
 const router = express.Router();
 
 
 
-router.post("/signup",async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
         const { Name, Email, Password, CnfrmPassword } = req.body;
 
-
-        // Step 1: Check required fields
-        if (!Name || !Email || !Password || !CnfrmPassword) {
-            return res.status(400).json({ message: "All fields are required" });
-        }
-
-        // Step 2: Check if passwords match
-        if (Password !== CnfrmPassword) {
-            return res.status(400).json({ message: "Passwords do not match" });
+        const errors = signupValidations(req.body)
+        if (Object.keys(errors).length > 0) {
+            return res.status(400).json({ errors });
         }
 
         // Step 3: Check if user already exists
@@ -57,6 +52,8 @@ router.post("/login", async (req, res) => {
         const { Email, Password } = req.body;
 
         // Step 1: Check if the required fields are provided
+
+        
         if (!Email || !Password) {
             return res.status(400).json({ message: "Email and Password are required" });
         }
@@ -75,7 +72,6 @@ router.post("/login", async (req, res) => {
 
         // Step 4: Successful login - Send a response (you could also create a JWT here)
         payload = {
-            email: existingUser.Email,
             id: existingUser._id
         }
         const token = jwt.sign(payload, secret_key)
@@ -87,9 +83,9 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.get("/getUser",authMiddleware , async (req, res) => {
+router.get("/getUser", authMiddleware, async (req, res) => {
     try {
-        const user = await userModel.findById(req.user.id);          
+        const user = await userModel.findById(req.user.id);
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });

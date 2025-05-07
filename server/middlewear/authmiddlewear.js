@@ -10,8 +10,8 @@ const authmiddlewear = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, secret_key); // Replace with your secret
-        req.user = decoded; // Store user information
+        const decoded = jwt.verify(token, secret_key); 
+        req.user = decoded; 
 
         next();
     } catch (err) {

@@ -3,7 +3,7 @@
     const token = localStorage.getItem("token");
 
     if (!token) {
-        return <Navigate to="/" replace />; // Redirect to login if not authenticated
+        return <Navigate to="/" replace />; 
     }
 
     return children;
