@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const LoginForm = () => {
-    const [userdata, setUserdata] = useState({ Email: "", Password: "" })
+    const [userdata, setUserdata] = useState({ email: "", password: "" })
     const [error, setError] = useState({
         emailerror: "",
         passworderror: ""
@@ -21,12 +21,12 @@ const LoginForm = () => {
         setUserdata({ ...userdata, [name]: value })
 
 
-        if (name == "Email") {
-            return setError({ ...error, emailerror: emailregex.test(userdata.Email) ? "" : "valid format" })
+        if (name == "email") {
+            return setError({ ...error, emailerror: emailregex.test(userdata.email) ? "" : "valid format" })
         }
 
-        if (name == "Password") {
-            return setError({ ...error, passworderror: passwordRegex.test(userdata.Password) ? "" : "password must have at least 6 characters and one uppercase letter" })
+        if (name == "password") {
+            return setError({ ...error, passworderror: passwordRegex.test(userdata.password) ? "" : "password must have at least 6 characters and one uppercase letter" })
         }
     }
 
@@ -35,8 +35,10 @@ const LoginForm = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        console.log(userdata);
+        
 
-        if (!userdata.Email || !userdata.Password) {
+        if (!userdata.email || !userdata.password) {
             toast.error("Please enter both email and password.");
             return;
         }
@@ -69,12 +71,12 @@ const LoginForm = () => {
                 <form onSubmit={handleLogin}>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="email" placeholder="Enter email" name="Email" onChange={getinputData} value={userdata.Name} />
+                        <input type="email" className="form-control" id="email" placeholder="Enter email" name="email" onChange={getinputData} value={userdata.userName} />
                         <small>{error.emailerror}</small>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="password" placeholder="Password" autoComplete='currentpassword' name='Password' onChange={getinputData} value={userdata.Password} />
+                        <input type="password" className="form-control" id="password" placeholder="password" autoComplete='currentpassword' name='password' onChange={getinputData} value={userdata.password} />
                         <small>{error.passworderror}</small>
                     </div>
                     <button type="submit" className="btn btn-primary w-100">Login</button>

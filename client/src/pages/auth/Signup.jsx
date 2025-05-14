@@ -5,10 +5,11 @@ import toast from "react-hot-toast";
 
 const SignupForm = () => {
   const [userdata, setUserdata] = useState({
-    Name: "",
-    Email: "",
-    Password: "",
-    CnfrmPassword: "",
+    userName: "",
+    email: "",
+    password: "",
+    phone: "",
+    city: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -29,9 +30,12 @@ const SignupForm = () => {
       navigate("/"); // Redirect to the login page
     } catch (err) {
       console.error(err);
-
-      if (err.response && err.response.data.errors) {
+      if (err.response && err.response.data.message === "Email already registered") {
+        toast.error("Email already registered");
+      } else if (err.response && err.response.data.errors) {
         setErrors(err.response.data.errors);
+        console.log(err.response.data.errors);
+
         toast.error("Please fix the validation errors.");
       } else {
         toast.error("An unexpected error occurred");
@@ -49,13 +53,13 @@ const SignupForm = () => {
             <input
               type="text"
               className="form-control"
-              id="fullname"
+              id="userName"
               placeholder="Enter your name"
-              name="Name"
+              name="userName"
               onChange={getInputdata}
-              value={userdata.Name}
+              value={userdata.userName}
             />
-            {errors.Name && <small className="text-danger">{errors.Name}</small>}
+            {errors.name && <small className="text-danger">{errors.name}</small>}
           </div>
 
           <div className="mb-3">
@@ -65,11 +69,11 @@ const SignupForm = () => {
               className="form-control"
               id="email"
               placeholder="Enter email"
-              name="Email"
+              name="email"
               onChange={getInputdata}
-              value={userdata.Email}
+              value={userdata.email}
             />
-            {errors.Email && <small className="text-danger">{errors.Email}</small>}
+            {errors.email && <small className="text-danger">{errors.email}</small>}
           </div>
 
           <div className="mb-3">
@@ -79,28 +83,41 @@ const SignupForm = () => {
               className="form-control"
               id="password"
               placeholder="Password"
-              name="Password"
+              name="password"
               onChange={getInputdata}
-              value={userdata.Password}
+              value={userdata.password}
             />
-            {errors.Password && <small className="text-danger">{errors.Password}</small>}
+            {errors.password && <small className="text-danger">{errors.password}</small>}
           </div>
 
           <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+            <label htmlFor="number" className="form-label">Phone</label>
             <input
-              type="password"
+              type="number"
               className="form-control"
-              id="confirmPassword"
-              placeholder="Confirm password"
-              name="CnfrmPassword"
+              id="phone"
+              placeholder="Phone"
+              name="phone"
               onChange={getInputdata}
-              value={userdata.CnfrmPassword}
+              value={userdata.phone}
             />
-            {errors.CnfrmPassword && <small className="text-danger">{errors.CnfrmPassword}</small>}
+            {errors.phone && <small className="text-danger">{errors.phone}</small>}
           </div>
 
-          <button type="submit" className="btn btn-success w-100">Submit          </button>
+          <div className="mb-3">
+            <label htmlFor="city" className="form-label">City</label>
+            <input
+              type="text"
+              className="form-control"
+              id="city"
+              placeholder="city"
+              name="city"
+              onChange={getInputdata}
+              value={userdata.city}
+            />
+            {errors.city && <small className="text-danger">{errors.city}</small>}
+          </div>
+          <button type="submit" className="btn btn-success w-100">Submit   </button>
 
           <div className="text-center mt-3">
             <small>

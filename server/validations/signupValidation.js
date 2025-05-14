@@ -2,27 +2,30 @@
 function validateUserFields(data) {
     const errors = {};
   
-    if (!data.Name || data.Name.trim() === "") {
-      errors.Name = "Name is required";
+    if (!data.userName || data.userName.trim() === "") {
+      errors.name = "Name is required";
     }
   
-    if (!data.Email || data.Email.trim() === "") {
-      errors.Email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(data.Email)) {
-      errors.Email = "Email is invalid";
+    if (!data.email || data.email.trim() === "") {
+      errors.email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(data.email)) {
+      errors.email = "Email is invalid";
     }
-  
-    if (!data.Password) {
-      errors.Password = "Password is required";
-    } else if (data.Password.length < 6) {
-      errors.Password = "Password must be at least 6 characters";
+    if (!data.phone || data.phone.trim() === "") {
+      errors.phone = "Phone Number is required";
+    } else if (!/^\d{10}$/.test(data.phone)) {
+      errors.phone = "Phone Number is invalid";
     }
-  
-    if (!data.CnfrmPassword) {
-      errors.CnfrmPassword = "Confirm Password is required";
-    } else if (data.Password !== data.CnfrmPassword) {
-      errors.CnfrmPassword = "Passwords do not match";
+    
+    if (!data.city || data.city.trim() === "") {
+      errors.city = "City is required";
     }
+    if (!data.password) {
+      errors.password = "Password is required";
+    } else if (data.password.length < 6) {
+      errors.password = "Password must be at least 6 characters";
+    }
+
   
     return errors;
   }

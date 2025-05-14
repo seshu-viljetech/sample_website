@@ -11,28 +11,28 @@ const router = express.Router();
 
 router.post("/signup", async (req, res) => {
     try {
-        const { Name, Email, Password, CnfrmPassword } = req.body;
+        const { userName, email, password,phone,city } = req.body;
+        console.log(req.body);
+        
 
         const errors = signupValidations(req.body)
         if (Object.keys(errors).length > 0) {
             return res.status(400).json({ errors });
         }
 
-        // Step 3: Check if user already exists
-        const existingUser = await userModel.findOne({ Email });
-        if (existingUser) {
+        const userExist = await userModel.findOne({ email });
+        if (userExist) {
             return res.status(400).json({ message: "Email already registered" });
         }
 
-        // Step 4: Hash the password
-        const hashedPassword = await bcrypt.hash(Password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Step 5: Create and save the user
         const newUser = new userModel({
-            Name,
-            Email,
-            Password: hashedPassword,
-            // Cnfrmpassword: hashedPassword, // optional: or don't store it at all
+            userName,
+            email,
+            phone,
+            city,
+            password: hashedPassword,
         });
 
         await newUser.save();
@@ -49,30 +49,34 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
 
-        const { Email, Password } = req.body;
+        const { email, password } = req.body;
 
         // Step 1: Check if the required fields are provided
 
         
-        if (!Email || !Password) {
+        if (!email || !password) {
             return res.status(400).json({ message: "Email and Password are required" });
         }
 
         // Step 2: Check if the user exists
-        const existingUser = await userModel.findOne({ Email });
-        if (!existingUser) {
+        const userExist = await userModel.findOne({ email });
+        console.log(userExist,"yse");
+
+        if (!userExist) {
             return res.status(400).json({ message: "Invalid email or password" });
         }
 
         // Step 3: Check if the password matches the hashed password in the database
-        const isMatch = await bcrypt.compare(Password, existingUser.Password);
+        const isMatch = await bcrypt.compare(password, userExist.password);
+        console.log("userpass",isMatch);
+        
         if (!isMatch) {
-            return res.status(400).json({ message: "Invalid email or password" });
+            return res.status(400).json({ message: "Invalid email or passwor" });
         }
 
         // Step 4: Successful login - Send a response (you could also create a JWT here)
         payload = {
-            id: existingUser._id
+            id: userExist._id
         }
         const token = jwt.sign(payload, secret_key)
         res.status(200).json({ message: "Login successful", token: token });
@@ -159,6 +163,5 @@ router.delete("/deleteUser", authMiddleware, async (req, res) => {
 });
 
 module.exports = router;
+ 
 
-
-module.exports = router;
