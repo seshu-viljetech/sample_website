@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from "react-hot-toast"
 import axios from 'axios';
+import Email from "../../assets/Email.svg"
 
 
 const LoginForm = () => {
@@ -67,10 +68,10 @@ const LoginForm = () => {
     return (
         <div className="container d-flex align-items-center justify-content-center min-vh-100">
             <div className="card shadow p-4" style={{ maxWidth: '400px', width: '100%' }}>
-                <h3 className="text-center mb-4">Login</h3>
+                <h3 className=" login_heading mb-3" >Login</h3>
                 <form onSubmit={handleLogin}>
                     <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email address</label>
+                        <label htmlFor="email" className="form-label email_label"><img src={Email} alt="Email icon"  width="24px" height="24px"/> <span>Email </span><span className='text-danger'>*</span></label>
                         <input type="email" className="form-control" id="email" placeholder="Enter email" name="email" onChange={getinputData} value={userdata.userName} />
                         <small>{error.emailerror}</small>
                     </div>
@@ -90,5 +91,10 @@ const LoginForm = () => {
         </div>
     );
 };
+
+const data=()=>{
+    console.log("data");
+    
+}
 
 export default LoginForm;
